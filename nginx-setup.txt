@@ -3,7 +3,8 @@ Setup system with necessary packages
 apt update && apt upgrade -y
 apt install -y software-properties-common ufw
 apt install -y build-essential git tree
-Download and extract packages
+
+#Download and extract packages
 
 mkdir /root/install;
 cd /root/install;
