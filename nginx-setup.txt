@@ -17,10 +17,12 @@ tar zxvf nginx-1.19.2.tar.gz
 tar xzvf pcre-8.44.tar.gz
 tar xzvf zlib-1.2.11.tar.gz
 tar xzvf openssl-1.1.1g.tar.gz
-Install additional dev packages
+
+#Install additional dev packages
 
 apt install -y perl libperl-dev libgd3 libgd-dev libgeoip1 libgeoip-dev geoip-bin libxml2 libxml2-dev libxslt1.1 libxslt1-dev
-Compile and install nginx
+
+#Compile and install nginx
 
 cd ~/nginx-1.19.2
 
@@ -85,7 +87,8 @@ cd ~/nginx-1.19.2
 
 make
 make install
-Setup files and directories of nginx
+
+#Setup files and directories of nginx
 
 ln -s /usr/lib/nginx/modules /etc/nginx/modules
 
@@ -96,7 +99,9 @@ adduser --system --home /nonexistent --shell /bin/false --no-create-home --disab
 mkdir -p /var/cache/nginx/client_temp /var/cache/nginx/fastcgi_temp /var/cache/nginx/proxy_temp /var/cache/nginx/scgi_temp /var/cache/nginx/uwsgi_temp
 chmod 700 /var/cache/nginx/*
 chown nginx:root /var/cache/nginx/*
+
 vim /etc/systemd/system/nginx.service
+
 [Unit]
 Description=nginx - high performance web server
 Documentation=https://nginx.org/en/docs/
@@ -116,16 +121,20 @@ WantedBy=multi-user.target
 systemctl enable nginx.service
 systemctl start nginx.service
 systemctl status nginx.service
+
 rm -vf /etc/nginx/*.default
 
 mkdir -pv /root/.vim/
 cd /root/install/nginx-1.19.2/contrib/vim/
 cp -pvr * /root/.vim/
+
 mkdir /etc/nginx/{conf.d,snippets,sites-available,sites-enabled}
 
 chmod 640 /var/log/nginx/*
 chown nginx:adm /var/log/nginx/access.log /var/log/nginx/error.log
+
 vim /etc/logrotate.d/nginx
+
 /var/log/nginx/*.log {
     daily
     missingok
